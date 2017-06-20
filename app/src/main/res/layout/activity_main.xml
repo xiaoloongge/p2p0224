@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/main_fl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:ignore="Suspicious0dp">
+
+    </FrameLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:id="@+id/main_rg">
+        <RadioButton
+            android:id="@+id/rb_main"
+            style="@style/MainButtonStyle"
+            android:layout_marginTop="5dp"
+            android:checked="true"
+            android:drawableTop="@drawable/main_icon"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/rb_invest"
+            style="@style/MainButtonStyle"
+            android:layout_marginTop="5dp"
+            android:drawableTop="@drawable/invest_icon"
+            android:text="投资" />
+
+        <RadioButton
+            android:id="@+id/rb_propert"
+            style="@style/MainButtonStyle"
+            android:layout_marginTop="5dp"
+            android:drawableTop="@drawable/property_icon"
+            android:text="资产" />
+
+        <RadioButton
+            android:id="@+id/rb_more"
+            style="@style/MainButtonStyle"
+            android:layout_marginTop="5dp"
+            android:drawableTop="@drawable/more_icon"
+            android:text="更多" />
+    </RadioGroup>
+
+</LinearLayout>
