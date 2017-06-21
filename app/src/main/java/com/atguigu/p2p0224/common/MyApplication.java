@@ -19,6 +19,8 @@ public class MyApplication extends Application {
         super.onCreate();
         //初始化上下文
         context = this;
+        //初始化crashHandler
+        //CrashHandler.getInstance().init(this);
 
     }
 }
