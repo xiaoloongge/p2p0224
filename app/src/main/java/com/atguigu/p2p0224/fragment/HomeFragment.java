@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p0224.R;
 import com.atguigu.p2p0224.bean.IndexBean;
 import com.atguigu.p2p0224.common.AppNetConfig;
+import com.atguigu.p2p0224.utils.HttpUtils;
 import com.atguigu.p2p0224.utils.UIUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -78,31 +79,46 @@ public class HomeFragment extends Fragment {
     private List<String> list = new ArrayList<>();
     private void initData() {
         loadNet();
-        initBanner();
+
     }
 
 
     private void loadNet() {
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(AppNetConfig.INDEX,new AsyncHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, String content) {
-                super.onSuccess(statusCode, content);
-
-                try {
-                    parseJson(content);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                //解析数据
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.get(AppNetConfig.INDEX,new AsyncHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, String content) {
+//                super.onSuccess(statusCode, content);
+//
+////                try {
+////                    parseJson(content);
+////                } catch (JSONException e) {
+////                    e.printStackTrace();
+////                }
+//                //解析数据
 //                IndexBean indexBean = JSON.parseObject(content, IndexBean.class);
-//                Log.d("content", "onSuccess: "+indexBean.getProInfo().getName());
+//                initBanner(indexBean);
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable error, String content) {
+//                super.onFailure(error, content);
+//                Log.d("content", "onFailure: "+content);
+//            }
+//        });
+
+        HttpUtils.getInstance().get(AppNetConfig.INDEX,
+                new HttpUtils.OnHttpClientListener() {
+            @Override
+            public void onSuccess(String json) {
+                //解析数据
+               IndexBean indexBean = JSON.parseObject(json, IndexBean.class);
+               initBanner(indexBean);
             }
 
             @Override
-            public void onFailure(Throwable error, String content) {
-                super.onFailure(error, content);
-                Log.d("content", "onFailure: "+content);
+            public void onFailure(String message) {
+
             }
         });
     }
@@ -148,8 +164,13 @@ public class HomeFragment extends Fragment {
     /*
     * 初始化banner
     * */
-    private void initBanner() {
-        list.add(AppNetConfig.BASE_URL+"images/index02.png");
+
+    private void initBanner(IndexBean indexBean) {
+        List<IndexBean.ImageArrBean> imageArr = indexBean.getImageArr();
+        for (int i = 0; i < imageArr.size(); i++) {
+            String imaurl = imageArr.get(i).getIMAURL();
+            list.add(AppNetConfig.BASE_URL+imaurl);
+        }
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
