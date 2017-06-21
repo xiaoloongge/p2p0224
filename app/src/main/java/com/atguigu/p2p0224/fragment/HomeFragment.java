@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p0224.R;
+import com.atguigu.p2p0224.base.BaseFragment;
 import com.atguigu.p2p0224.bean.IndexBean;
 import com.atguigu.p2p0224.common.AppNetConfig;
 import com.atguigu.p2p0224.utils.HttpUtils;
@@ -37,7 +38,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2017/6/20.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
 
     @Bind(R.id.base_title)
@@ -53,33 +54,18 @@ public class HomeFragment extends Fragment {
     @Bind(R.id.tv_home_yearrate)
     TextView tvHomeYearrate;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = UIUtils.inflate(R.layout.fragment_home);
-        ButterKnife.bind(this, view);
-
-        return view;
-    }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        initView();
-        initData();
-        initListener();
-
+    protected void initTitle() {
+        baseTitle.setText("首页");
     }
 
-    private void initListener() {
-
-    }
 
     private List<String> list = new ArrayList<>();
-    private void initData() {
-        loadNet();
 
+
+    public void initData() {
+        loadNet();
     }
 
 
@@ -179,8 +165,9 @@ public class HomeFragment extends Fragment {
         banner.start();
     }
 
-    private void initView() {
-
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override

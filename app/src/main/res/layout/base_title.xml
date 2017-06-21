@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/black">
 
     <TextView
         android:id="@+id/base_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="首页"
+        tools:text="首页"
         android:textSize="25sp"
         android:textColor="@android:color/white"
         android:gravity="center_vertical"
@@ -19,9 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:visibility="gone"
         android:background="@drawable/left"/>
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/base_setting"
         android:layout_marginRight="10dp"
         android:layout_width="wrap_content"

@@ -26,27 +26,33 @@ public class HttpUtils {
     }
 
 
+    private OnHttpClientListener onHttpClientListener;
     public void get(String url, final OnHttpClientListener onHttpClientListener){
-        httpClient.get(url,new AsyncHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, String content) {
-                super.onSuccess(statusCode, content);
 
-                if (onHttpClientListener != null){
-                    onHttpClientListener.onSuccess(content);
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable error, String content) {
-                super.onFailure(error, content);
-                if (onHttpClientListener != null){
-                    onHttpClientListener.onFailure(content);
-                }
-
-            }
-        });
+        this.onHttpClientListener = onHttpClientListener;
+        httpClient.get(url,handler);
     }
+
+
+    AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler(){
+        @Override
+        public void onSuccess(int statusCode, String content) {
+            super.onSuccess(statusCode, content);
+
+            if (onHttpClientListener != null){
+                onHttpClientListener.onSuccess(content);
+            }
+        }
+
+        @Override
+        public void onFailure(Throwable error, String content) {
+            super.onFailure(error, content);
+            if (onHttpClientListener != null){
+                onHttpClientListener.onFailure(content);
+            }
+
+        }
+    };
 
 //    public void post(String url, Map<String,String> map,
 //                     final OnHttpClientListener onHttpClientListener){
