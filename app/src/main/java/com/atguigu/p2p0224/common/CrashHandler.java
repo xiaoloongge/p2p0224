@@ -41,6 +41,12 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         *
         * */
 
+//        ThreadManager.getInstance().getThread().execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                
+//            }
+//        });
         new Thread(){
             @Override
             public void run() {
