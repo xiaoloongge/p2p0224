@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.p2p0224.R;
+import com.atguigu.p2p0224.common.AppManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,10 +36,18 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
+        AppManager.getInstance().addActivity(this);
+
         initView();
         initData();
         initListener();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getInstance().removeActivity(this);
     }
 
     private void initListener() {
