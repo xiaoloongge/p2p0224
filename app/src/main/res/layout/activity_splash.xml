@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="当前版本:%1$s"
+            android:text="@string/splash_version"
             android:id="@+id/splash_tv_version"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
