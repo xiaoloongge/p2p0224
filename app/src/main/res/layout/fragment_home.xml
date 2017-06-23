@@ -111,6 +111,9 @@
                 <!--atguigu:max="100"-->
                 <!--atguigu:progress="70"-->
                 <!--/>-->
+            <com.atguigu.p2p0224.view.ProgressView
+                android:layout_width="120dp"
+                android:layout_height="120dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
