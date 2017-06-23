@@ -96,7 +96,7 @@ public class MyScrollView extends ScrollView {
                             //清除原有的初始标记
                             rect.setEmpty();
 
-                            //childView.clearAnimation();
+                            childView.clearAnimation();
                         }
 
                         @Override

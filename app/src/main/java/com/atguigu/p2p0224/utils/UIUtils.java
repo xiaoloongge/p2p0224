@@ -1,6 +1,7 @@
 package com.atguigu.p2p0224.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import com.atguigu.p2p0224.common.MyApplication;
@@ -58,4 +59,19 @@ public class UIUtils {
         return (int) (px / density + 0.5);
     }
 
+    public static void runOnUIThread(Runnable runnable) {
+
+        //pid processid 进程id
+        //tid threadid 线程id
+        //注意：如果在主线程中运行 那么tid == pid
+        Log.d("process", "runOnUIThread: "
+                +"processid=="+MyApplication.getPid()
+                +"  threadid== "+android.os.Process.myTid()
+        );
+        if(MyApplication.getPid() == android.os.Process.myTid()){
+            runnable.run();
+        }else{
+            MyApplication.getHandler().post(runnable);
+        }
+    }
 }

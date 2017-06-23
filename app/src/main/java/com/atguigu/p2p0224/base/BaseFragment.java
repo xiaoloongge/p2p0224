@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.atguigu.p2p0224.view.LoadingPager;
+
 import butterknife.ButterKnife;
 
 /**
@@ -21,31 +23,48 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if (getLayoutId() == 0){
-            TextView view = new TextView(getActivity());
-            view.setText("你呀小白啊");
-            return view;
-        }
+//        if (getLayoutId() == 0){
+//            TextView view = new TextView(getActivity());
+//            view.setText("你呀小白啊");
+//            return view;
+//        }
+//
+//        View view = View.inflate(
+//                getActivity(),
+//                getLayoutId(),
+//                null
+//        );
+//        ButterKnife.bind(this,view);
+//
+//        initView();
+//        initTitle();
+//        initData();
+//        initListener();
 
-        View view = View.inflate(
-                getActivity(),
-                getLayoutId(),
-                null
-        );
-        ButterKnife.bind(this,view);
+        LoadingPager loadingPager = new LoadingPager(getActivity()) {
+            @Override
+            public int getLayoutid() {
+                return BaseFragment.this.getLayoutId();
+            }
 
-        initView();
-        initTitle();
-        initData();
-        initListener();
+            @Override
+            protected void setResult(View successView, String json) {
 
-        return view;
+            }
+
+            @Override
+            protected String getUrl() {
+                return null;
+            }
+        };
+
+        return loadingPager;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        //ButterKnife.unbind(this);
     }
 
     protected abstract void initTitle();

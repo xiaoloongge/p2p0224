@@ -14,7 +14,9 @@ import com.atguigu.p2p0224.R;
 import com.atguigu.p2p0224.base.BaseFragment;
 import com.atguigu.p2p0224.bean.IndexBean;
 import com.atguigu.p2p0224.common.AppNetConfig;
+import com.atguigu.p2p0224.common.ThreadManager;
 import com.atguigu.p2p0224.utils.HttpUtils;
+import com.atguigu.p2p0224.utils.UIUtils;
 import com.atguigu.p2p0224.view.ProgressView;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
@@ -37,25 +39,25 @@ import butterknife.ButterKnife;
 public class HomeFragment extends BaseFragment {
 
 
-    @Bind(R.id.base_title)
-    TextView baseTitle;
-    @Bind(R.id.base_back)
-    ImageView baseBack;
-    @Bind(R.id.base_setting)
-    ImageView baseSetting;
-    @Bind(R.id.banner)
-    Banner banner;
-    @Bind(R.id.tv_home_product)
-    TextView tvHomeProduct;
-    @Bind(R.id.tv_home_yearrate)
-    TextView tvHomeYearrate;
-    @Bind(R.id.proView)
-    ProgressView proView;
+//    @Bind(R.id.base_title)
+//    TextView baseTitle;
+//    @Bind(R.id.base_back)
+//    ImageView baseBack;
+//    @Bind(R.id.base_setting)
+//    ImageView baseSetting;
+//    @Bind(R.id.banner)
+//    Banner banner;
+//    @Bind(R.id.tv_home_product)
+//    TextView tvHomeProduct;
+//    @Bind(R.id.tv_home_yearrate)
+//    TextView tvHomeYearrate;
+//    @Bind(R.id.proView)
+//    ProgressView proView;
 
 
     @Override
     protected void initTitle() {
-        baseTitle.setText("首页");
+        //baseTitle.setText("首页");
     }
 
 
@@ -63,6 +65,7 @@ public class HomeFragment extends BaseFragment {
 
 
     public void initData() {
+
         loadNet();
     }
 
@@ -112,12 +115,12 @@ public class HomeFragment extends BaseFragment {
 
         String progress = indexBean.getProInfo().getProgress();
 
-        proView.setSweepAngle(Integer.parseInt(progress));
+       // proView.setSweepAngle(Integer.parseInt(progress));
     }
 
-    /*
-    * 手动解析
-    * */
+
+//    * 手动解析
+//    *
     private void parseJson(String content) throws JSONException {
         //创建IndexBean对象
         IndexBean bean = new IndexBean();
@@ -153,9 +156,9 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    /*
-    * 初始化banner
-    * */
+
+//    * 初始化banner
+//    *
 
     private void initBanner(IndexBean indexBean) {
         List<IndexBean.ImageArrBean> imageArr = indexBean.getImageArr();
@@ -164,11 +167,11 @@ public class HomeFragment extends BaseFragment {
             list.add(AppNetConfig.BASE_URL + imaurl);
         }
         //设置图片加载器
-        banner.setImageLoader(new GlideImageLoader());
+        //banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
-        banner.setImages(list);
+        //banner.setImages(list);
         //banner设置方法全部调用完毕时最后调用
-        banner.start();
+        //banner.start();
     }
 
     @Override
@@ -182,19 +185,10 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
-
-    /*
-    * 加载图片类
-    *
-    * */
+//    * 加载图片类
+//    *
+//    *
     public class GlideImageLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
