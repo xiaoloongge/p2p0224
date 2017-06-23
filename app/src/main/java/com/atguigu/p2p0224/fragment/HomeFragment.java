@@ -2,8 +2,6 @@ package com.atguigu.p2p0224.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +15,7 @@ import com.atguigu.p2p0224.base.BaseFragment;
 import com.atguigu.p2p0224.bean.IndexBean;
 import com.atguigu.p2p0224.common.AppNetConfig;
 import com.atguigu.p2p0224.utils.HttpUtils;
-import com.atguigu.p2p0224.utils.UIUtils;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.atguigu.p2p0224.view.ProgressView;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -53,6 +49,8 @@ public class HomeFragment extends BaseFragment {
     TextView tvHomeProduct;
     @Bind(R.id.tv_home_yearrate)
     TextView tvHomeYearrate;
+    @Bind(R.id.proView)
+    ProgressView proView;
 
 
     @Override
@@ -95,18 +93,26 @@ public class HomeFragment extends BaseFragment {
 
         HttpUtils.getInstance().get(AppNetConfig.INDEX,
                 new HttpUtils.OnHttpClientListener() {
-            @Override
-            public void onSuccess(String json) {
-                //解析数据
-               IndexBean indexBean = JSON.parseObject(json, IndexBean.class);
-               initBanner(indexBean);
-            }
+                    @Override
+                    public void onSuccess(String json) {
+                        //解析数据
+                        IndexBean indexBean = JSON.parseObject(json, IndexBean.class);
+                        initBanner(indexBean);
+                        initProgressView(indexBean);
+                    }
 
-            @Override
-            public void onFailure(String message) {
+                    @Override
+                    public void onFailure(String message) {
 
-            }
-        });
+                    }
+                });
+    }
+
+    private void initProgressView(IndexBean indexBean) {
+
+        String progress = indexBean.getProInfo().getProgress();
+
+        proView.setSweepAngle(Integer.parseInt(progress));
     }
 
     /*
@@ -143,7 +149,7 @@ public class HomeFragment extends BaseFragment {
         JSONObject proInfo = object.getJSONObject("proInfo");
         String name = proInfo.getString("name");
         int id = proInfo.getInt("id");
-        Log.d("json", "parseJson: "+name);
+        Log.d("json", "parseJson: " + name);
 
     }
 
@@ -155,7 +161,7 @@ public class HomeFragment extends BaseFragment {
         List<IndexBean.ImageArrBean> imageArr = indexBean.getImageArr();
         for (int i = 0; i < imageArr.size(); i++) {
             String imaurl = imageArr.get(i).getIMAURL();
-            list.add(AppNetConfig.BASE_URL+imaurl);
+            list.add(AppNetConfig.BASE_URL + imaurl);
         }
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
@@ -174,6 +180,14 @@ public class HomeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
 
