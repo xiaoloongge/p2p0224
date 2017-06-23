@@ -112,6 +112,8 @@
                 <!--atguigu:progress="70"-->
                 <!--/>-->
             <com.atguigu.p2p0224.view.ProgressView
+                atguigu:textColor = "#ffccff"
+                atguigu:paintColor = "#ccffcc"
                 android:id="@+id/proView"
                 android:layout_width="120dp"
                 android:layout_height="120dp" />
