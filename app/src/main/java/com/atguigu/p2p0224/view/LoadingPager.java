@@ -1,6 +1,7 @@
 package com.atguigu.p2p0224.view;
 
 import android.content.Context;
+import android.icu.lang.UScript;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -75,14 +76,16 @@ public abstract class LoadingPager extends FrameLayout {
         loadingView.setVisibility(currentState == STATE_LOADING ? View.VISIBLE : View.GONE);
 
         if (successView == null) {
-            successView = UIUtils.inflate(getLayoutid());
+            successView = getView();
             this.addView(successView);
         }
+
         successView.setVisibility(currentState == STATE_SUCCESS ? View.VISIBLE : View.GONE);
 
+        //setResult(successView,"");
     }
 
-    public abstract int getLayoutid();
+    public abstract View getView();
 
     /*
     *
@@ -97,10 +100,12 @@ public abstract class LoadingPager extends FrameLayout {
         String url = getUrl();
         //判断是否加载网络
         if (TextUtils.isEmpty(url)){
+            //不加载网络
             currentState = STATE_SUCCESS;
             showSafePager();
-
+            setResult(successView,"");
         }else{
+            //加载网络
             HttpUtils.getInstance().get(url, new HttpUtils.OnHttpClientListener() {
                 @Override
                 public void onSuccess(String json) {
