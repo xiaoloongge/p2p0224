@@ -20,22 +20,22 @@ public class MoreFragment extends BaseFragment {
 
 
     @Override
-    protected String getChildUrl() {
+    public String getChildUrl() {
         return "";
     }
 
     @Override
-    protected void setContent(String json) {
+    public void setContent(String json) {
 
     }
 
     @Override
-    protected void initTitle() {
+    public void initTitle() {
 
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
 
     }
 

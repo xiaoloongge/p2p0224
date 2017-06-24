@@ -34,17 +34,17 @@ public class InvestReFragment extends BaseFragment {
     };
 
     @Override
-    protected String getChildUrl() {
+    public String getChildUrl() {
         return null;
     }
 
     @Override
-    protected void initTitle() {
+    public void initTitle() {
 
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
 
     }
 

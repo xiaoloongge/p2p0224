@@ -26,7 +26,7 @@ public class UIUtils {
     /*
     * 返回一个上下文
     * */
-    private static Context getContext() {
+    public static Context getContext() {
 
         return MyApplication.getContext();
     }

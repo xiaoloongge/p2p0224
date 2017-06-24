@@ -56,12 +56,12 @@ public class HomeFragment extends BaseFragment {
 
 
     @Override
-    protected String getChildUrl() {
+    public String getChildUrl() {
         return AppNetConfig.INDEX;
     }
 
     @Override
-    protected void setContent(String json) {
+    public void setContent(String json) {
         //解析数据
         IndexBean indexBean = JSON.parseObject(json, IndexBean.class);
         initBanner(indexBean);
@@ -69,7 +69,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initTitle() {
+    public void initTitle() {
         baseTitle.setText("首页");
     }
 
