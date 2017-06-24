@@ -21,7 +21,7 @@ public class InvestFragment extends BaseFragment {
 
     @Override
     protected String getChildUrl() {
-        return AppNetConfig.INDEX;
+        return "";
     }
 
     @Override

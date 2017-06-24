@@ -3,7 +3,9 @@ package com.atguigu.p2p0224.view;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -20,7 +22,7 @@ public abstract class LoadingPager extends FrameLayout {
     private View errorView;
     private View loadingView;
     private static final int STATE_LOADING = 0;
-    private static final int STATE_ERROR= 1;
+    private static final int STATE_ERROR = 1;
     private static final int STATE_SUCCESS = 2;
 
     private int currentState = STATE_LOADING;
@@ -35,7 +37,6 @@ public abstract class LoadingPager extends FrameLayout {
         super(context, attrs);
         init();
     }
-
 
 
     private void init() {
@@ -55,7 +56,7 @@ public abstract class LoadingPager extends FrameLayout {
     * */
     private void showSafePager() {
         //保证在主线程中运行
-        UIUtils.runOnUIThread(new Runnable(){
+        UIUtils.runOnUIThread(new Runnable() {
             @Override
             public void run() {
                 showPager();
@@ -70,14 +71,14 @@ public abstract class LoadingPager extends FrameLayout {
     * */
     private void showPager() {
 
-        errorView.setVisibility(currentState == STATE_ERROR?View.VISIBLE : View.GONE);
-        loadingView.setVisibility(currentState == STATE_LOADING?View.VISIBLE : View.GONE);
+        errorView.setVisibility(currentState == STATE_ERROR ? View.VISIBLE : View.GONE);
+        loadingView.setVisibility(currentState == STATE_LOADING ? View.VISIBLE : View.GONE);
 
-        if (successView == null){
+        if (successView == null) {
             successView = UIUtils.inflate(getLayoutid());
             this.addView(successView);
         }
-        successView.setVisibility(currentState == STATE_SUCCESS?View.VISIBLE : View.GONE);
+        successView.setVisibility(currentState == STATE_SUCCESS ? View.VISIBLE : View.GONE);
 
     }
 
@@ -91,25 +92,43 @@ public abstract class LoadingPager extends FrameLayout {
     * 连网失败  改变状态  error
     *
     * */
-    public void loadNet(){
+    public void loadNet() {
+
         String url = getUrl();
+        //判断是否加载网络
+        if (TextUtils.isEmpty(url)){
+            currentState = STATE_SUCCESS;
+            showSafePager();
+        }else{
+            HttpUtils.getInstance().get(url, new HttpUtils.OnHttpClientListener() {
+                @Override
+                public void onSuccess(String json) {
+                    Log.d("loadingPager", "onSuccess: "+json);
+                    //处理当前获取的JSON串是否是网页
+                    if (json.indexOf("title") > 0){
+                        currentState = STATE_ERROR;
 
-        HttpUtils.getInstance().get(url, new HttpUtils.OnHttpClientListener() {
-            @Override
-            public void onSuccess(String json) {
-                //改变当前状态
-                currentState = STATE_SUCCESS;
-                setResult(successView,json);
-                showSafePager();
-            }
+                        showSafePager();
+                    }else{
+                        //改变当前状态
+                        currentState = STATE_SUCCESS;
+                        setResult(successView, json);
+                        showSafePager();
+                    }
 
-            @Override
-            public void onFailure(String message) {
-                currentState = STATE_ERROR;
-                //setResult(errorView,"");
-                showSafePager();
-            }
-        });
+                }
+
+
+                @Override
+                public void onFailure(String message) {
+                    Log.d("loadingPager", "onSuccess: "+message);
+                    currentState = STATE_ERROR;
+                    //setResult(errorView,"");
+                    showSafePager();
+                }
+            });
+        }
+
     }
 
     protected abstract void setResult(View successView, String json);
