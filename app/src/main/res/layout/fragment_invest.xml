@@ -3,9 +3,40 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffccff"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/tv_invest_all"
+            android:text="全部理财"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:id="@+id/tv_invest_recommend"
+            android:text="推荐理财"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/tv_invest_hot"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="热门理财"/>
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tv"
-        android:text="aaaaa"/>
+        android:id="@+id/vp_invest">
+
+    </android.support.v4.view.ViewPager>
 </LinearLayout>
