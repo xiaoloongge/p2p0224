@@ -41,6 +41,6 @@ public class MoreFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_home;
+        return 0;
     }
 }

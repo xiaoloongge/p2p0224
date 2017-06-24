@@ -99,6 +99,7 @@ public abstract class LoadingPager extends FrameLayout {
         if (TextUtils.isEmpty(url)){
             currentState = STATE_SUCCESS;
             showSafePager();
+
         }else{
             HttpUtils.getInstance().get(url, new HttpUtils.OnHttpClientListener() {
                 @Override
@@ -106,14 +107,19 @@ public abstract class LoadingPager extends FrameLayout {
                     Log.d("loadingPager", "onSuccess: "+json);
                     //处理当前获取的JSON串是否是网页
                     if (json.indexOf("title") > 0){
-                        currentState = STATE_ERROR;
-
-                        showSafePager();
+                        //currentState = STATE_ERROR;
+                        loadState = LoadState.ERROR;
+                        //showSafePager();
+                        //设置状态
+                        showState();
                     }else{
                         //改变当前状态
-                        currentState = STATE_SUCCESS;
-                        setResult(successView, json);
-                        showSafePager();
+                        //currentState = STATE_SUCCESS;
+                        loadState = LoadState.SUCCESS;
+                        loadState.setJson(json);
+                        //setResult(successView, json);
+                        //showSafePager();
+                        showState();
                     }
 
                 }
@@ -122,13 +128,59 @@ public abstract class LoadingPager extends FrameLayout {
                 @Override
                 public void onFailure(String message) {
                     Log.d("loadingPager", "onSuccess: "+message);
-                    currentState = STATE_ERROR;
-                    //setResult(errorView,"");
-                    showSafePager();
+                    loadState = LoadState.ERROR;
+                    //showSafePager();
+                    showState();
                 }
             });
         }
 
+    }
+
+    private void showState() {
+
+        switch (loadState){
+            case SUCCESS:
+                currentState = STATE_SUCCESS;
+                break;
+            case ERROR:
+                currentState = STATE_ERROR;
+                break;
+            case LOADING:
+                currentState = STATE_LOADING;
+                break;
+        }
+
+        showSafePager();
+
+        if (currentState == STATE_SUCCESS){
+            setResult(successView, loadState.SUCCESS.getJson());
+        }
+
+    }
+
+    /*
+    * 枚举 放了 成功 失败 加载中的常量
+    *
+    * */
+    private LoadState loadState;
+    public enum LoadState{
+
+        SUCCESS(0),ERROR(1),LOADING(2);
+
+        private int state;
+        private String json;
+        LoadState(int state){
+            this.state = state;
+        }
+
+        public void setJson(String json){
+            this.json = json;
+        }
+
+        public String getJson(){
+            return json;
+        }
     }
 
     protected abstract void setResult(View successView, String json);
