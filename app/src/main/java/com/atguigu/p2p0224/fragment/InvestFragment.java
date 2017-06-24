@@ -138,8 +138,9 @@ public class InvestFragment extends BaseFragment implements View.OnClickListener
     private void initViewPager() {
         listFragment = new ArrayList<>();
         listFragment.add(new InvestAllFragment());
-        listFragment.add(new InvesthotFragment());
         listFragment.add(new InvestReFragment());
+        listFragment.add(new InvesthotFragment());
+
         vpInvest.setAdapter(new MyAdapter(getFragmentManager()));
     }
 
