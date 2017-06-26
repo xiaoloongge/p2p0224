@@ -1,10 +1,12 @@
 package com.atguigu.p2p0224.base;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.atguigu.p2p0224.bean.LoginBean;
 import com.atguigu.p2p0224.common.AppManager;
 
 import butterknife.ButterKnife;
@@ -63,6 +65,31 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    /*
+    * 存储用户信息
+    * */
+    private String spName = "loginbean";
+    public void saveUser(LoginBean bean){
+        SharedPreferences sp = getSharedPreferences(spName, MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("name",bean.getName());
+        edit.putString("imageurl",bean.getImageurl());
+        edit.putString("iscredit",bean.getIscredit());
+        edit.putString("phone",bean.getPhone());
+        edit.commit();
+    }
+    /*
+    * 获取用户信息
+    * */
+    public LoginBean getUser(){
+        SharedPreferences sp = getSharedPreferences(spName, MODE_PRIVATE);
+        LoginBean bean = new LoginBean();
+        bean.setName(sp.getString("name","admin"));
+        bean.setImageurl(sp.getString("imageurl",""));
+        bean.setIscredit(sp.getString("iscredit",""));
+        bean.setPhone(sp.getString("phone",""));
+        return bean;
+    }
 
     @Override
     protected void onDestroy() {

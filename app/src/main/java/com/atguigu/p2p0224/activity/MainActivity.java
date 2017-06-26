@@ -169,4 +169,8 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyUp(keyCode,event);
     }
+
+    /*public static void startActivity(){
+
+    }*/
 }
