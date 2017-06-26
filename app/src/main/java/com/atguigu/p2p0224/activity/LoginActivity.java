@@ -53,6 +53,7 @@ public class LoginActivity extends BaseActivity {
     public void initTitle() {
         super.initTitle();
         baseTitle.setText("登录");
+        baseBack.setVisibility(View.VISIBLE);
     }
 
     /*
@@ -62,6 +63,14 @@ public class LoginActivity extends BaseActivity {
     * */
     @Override
     public void initListener() {
+
+        baseBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +138,14 @@ public class LoginActivity extends BaseActivity {
                 });
 
 
+            }
+        });
+
+        //注册监听
+        regitsterTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
             }
         });
     }
