@@ -1,5 +1,6 @@
 package com.atguigu.p2p0224.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 import com.atguigu.p2p0224.R;
 import com.atguigu.p2p0224.base.BaseFragment;
 import com.atguigu.p2p0224.common.AppNetConfig;
+import com.atguigu.p2p0224.utils.BitmapUtils;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,7 +67,19 @@ public class PropertyFragment extends BaseFragment {
     public void initData() {
         Picasso.with(getActivity())
                 .load(AppNetConfig.BASE_URL+"images/tx.png")
-                .transform(new CropCircleTransformation())
+
+                .transform(new Transformation() {
+                    @Override
+                    public Bitmap transform(Bitmap bitmap) {
+
+                        return BitmapUtils.getBitmap(bitmap);
+                    }
+
+                    @Override
+                    public String key() {
+                        return "CropCircleTransformation()";
+                    }
+                })
                 .into(ivMeIcon);
     }
 
