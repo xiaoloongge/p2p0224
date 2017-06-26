@@ -119,12 +119,13 @@ public class InvestReFragment extends BaseFragment {
             TextView textView = new TextView(getActivity());
             textView.setText(datas[group*7+position]);
             //产生随机颜色
-            Random random = new Random();
-            int red = random.nextInt(100)+50;
-            int green = random.nextInt(100)+50;
-            int blue = random.nextInt(100)+50;
-
-            textView.setTextColor(Color.rgb(red,green,blue));
+//            Random random = new Random();
+//            int red = random.nextInt(100)+50;
+//            int green = random.nextInt(100)+50;
+//            int blue = random.nextInt(100)+50;
+//
+//            textView.setTextColor(Color.rgb(red,green,blue));
+            textView.setTextColor(UIUtils.getColor());
             return textView;
         }
 

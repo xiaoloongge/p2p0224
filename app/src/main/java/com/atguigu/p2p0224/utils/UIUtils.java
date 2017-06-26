@@ -1,10 +1,15 @@
 package com.atguigu.p2p0224.utils;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.View;
 
 import com.atguigu.p2p0224.common.MyApplication;
+
+import java.util.Random;
 
 import static android.R.attr.key;
 
@@ -73,5 +78,28 @@ public class UIUtils {
         }else{
             MyApplication.getHandler().post(runnable);
         }
+    }
+
+    /*
+    * 获取随机颜色
+    * */
+    public static int getColor(){
+        //产生随机颜色
+        Random random = new Random();
+        int red = random.nextInt(100)+50;
+        int green = random.nextInt(100)+50;
+        int blue = random.nextInt(100)+50;
+        return Color.rgb(red,green,blue);
+    }
+
+
+    //用代码生成drawable
+    public static Drawable getDrawable(){
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.BLUE);
+        drawable.setCornerRadius(20);
+        drawable.setStroke(2,Color.RED);
+        drawable.setGradientType(GradientDrawable.RECTANGLE);
+        return drawable;
     }
 }
