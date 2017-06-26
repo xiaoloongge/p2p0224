@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.atguigu.p2p0224.bean.LoginBean;
 import com.atguigu.p2p0224.common.AppManager;
 
+import java.io.UnsupportedEncodingException;
+
 import butterknife.ButterKnife;
 
 /**
@@ -72,11 +74,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void saveUser(LoginBean bean){
         SharedPreferences sp = getSharedPreferences(spName, MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
+//        try {
+//            //String name = new String(bean.getName().getBytes(), "G");
+//
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
         edit.putString("name",bean.getName());
         edit.putString("imageurl",bean.getImageurl());
         edit.putString("iscredit",bean.getIscredit());
         edit.putString("phone",bean.getPhone());
         edit.commit();
+
     }
     /*
     * 获取用户信息
