@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.p2p0224.R;
+import com.atguigu.p2p0224.base.BaseActivity;
 import com.atguigu.p2p0224.common.AppManager;
 import com.atguigu.p2p0224.utils.UIUtils;
 
@@ -22,7 +23,7 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     @Bind(R.id.iv_welcome_icon)
     ImageView ivWelcomeIcon;
@@ -31,19 +32,6 @@ public class SplashActivity extends AppCompatActivity {
     @Bind(R.id.activity_splash)
     RelativeLayout activitySplash;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
-
-        AppManager.getInstance().addActivity(this);
-
-        initView();
-        initData();
-        initListener();
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -51,11 +39,11 @@ public class SplashActivity extends AppCompatActivity {
         AppManager.getInstance().removeActivity(this);
     }
 
-    private void initListener() {
+    public void initListener() {
 
     }
 
-    private void initData() {
+    public void initData() {
         //两秒跳转
 //        new Timer().schedule(new TimerTask() {
 //            @Override
@@ -104,12 +92,17 @@ public class SplashActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initView() {
+    public void initView() {
         //第一个参数是 含有占位字符的字符串 第二个参数是占位字符的值
         splashTvVersion.setText(
                 UIUtils.stringFormat(
                         R.string.splash_version,
                         getVersionCode()));
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_splash;
     }
 
     /*

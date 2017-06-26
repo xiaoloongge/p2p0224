@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.atguigu.p2p0224.R;
+import com.atguigu.p2p0224.base.BaseActivity;
 import com.atguigu.p2p0224.common.AppManager;
 import com.atguigu.p2p0224.fragment.HomeFragment;
 import com.atguigu.p2p0224.fragment.InvestFragment;
@@ -23,7 +24,7 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.main_fl)
     FrameLayout mainFl;
@@ -43,20 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private MoreFragment moreFragment;
     private PropertyFragment propertyFragment;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        AppManager.getInstance().addActivity(this);
 
-        //初始化控件
-        initView();
-        //初始化数据
-        initData();
-        //事件监听
-        initListener();
-    }
 
     @Override
     protected void onDestroy() {
@@ -64,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         AppManager.getInstance().removeActivity(this);
     }
 
-    private void initListener() {
+    public void initListener() {
 
         //radioGroup监听
         mainRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -141,23 +129,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initData() {
+    public void initData() {
 
 
     }
 
-    private void initView() {
+    public void initView() {
 
         switchFrgment(R.id.rb_main);
     }
 
-    /*
-    *
-    *
-    * */
-    public <T> T instance(int id) {
-        return (T) findViewById(id);
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
+
+
 
     /*
     * 双击退出
