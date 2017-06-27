@@ -81,6 +81,14 @@ public class PropertyFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(),IconSettingsActivity.class));
             }
         });
+
+        recharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),PayActivity.class));
+            }
+        });
+
     }
 
     @Override
