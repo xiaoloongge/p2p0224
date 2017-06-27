@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.atguigu.p2p0224.R;
 
-public class ZiChanActivity extends AppCompatActivity {
+public class ZiChanActivity extends  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

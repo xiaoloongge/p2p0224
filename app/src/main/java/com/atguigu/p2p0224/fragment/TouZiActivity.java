@@ -56,6 +56,7 @@ public class TouZiActivity extends BaseActivity {
         // apply styling
         // chart.setValueTypeface(mTf);
 
+        //加载字体
         Typeface mTf = Typeface.createFromAsset(this.getAssets(), "OpenSans-Regular.ttf");
         chart.setDescription("");
         chart.setDrawGridBackground(false);
@@ -63,6 +64,7 @@ public class TouZiActivity extends BaseActivity {
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTypeface(mTf);
+        //表格顶部有没有线
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
 
@@ -123,6 +125,7 @@ public class TouZiActivity extends BaseActivity {
         d2.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[0]);
         d2.setDrawValues(false);
 
+        //加载折线的数量的集合
         ArrayList<LineDataSet> sets = new ArrayList<LineDataSet>();
         sets.add(d1);
         sets.add(d2);
