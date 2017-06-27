@@ -57,9 +57,12 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- alipay sdk end -->
-        <activity android:name=".fragment.WidthDrawActivity"></activity>
+        <activity android:name=".fragment.WidthDrawActivity" />
+        <activity android:name=".fragment.TouZiActivity" />
+        <activity android:name=".fragment.TouZiZhiGuanActivity" />
+        <activity android:name=".fragment.ZiChanActivity"></activity>
     </application>
 
 </manifest>

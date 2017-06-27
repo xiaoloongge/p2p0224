@@ -96,6 +96,27 @@ public class PropertyFragment extends BaseFragment {
             }
         });
 
+        llTouzi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),TouZiActivity.class));
+            }
+        });
+
+        llTouziZhiguan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),TouZiZhiGuanActivity.class));
+            }
+        });
+
+        llZichan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ZiChanActivity.class));
+            }
+        });
+
 
     }
 
