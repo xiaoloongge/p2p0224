@@ -100,6 +100,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         return bean;
     }
 
+    /*
+    * 清除sp
+    * */
+    public void clearSp(){
+        //清除Sp文件（清除的是sp内容）
+        SharedPreferences sp = getSharedPreferences(spName, MODE_PRIVATE);
+        sp.edit().clear().commit();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

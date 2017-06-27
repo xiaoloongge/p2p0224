@@ -70,7 +70,7 @@ public class AppManager {
 
     public void removeAll(){
 
-        for (int i = stack.size()-1; i >=0 ; i++) {
+        for (int i = stack.size()-1; i >=0 ; i--) {
 
             Activity currentActivity = stack.get(i);
 

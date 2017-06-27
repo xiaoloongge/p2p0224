@@ -16,6 +16,9 @@ import com.atguigu.p2p0224.utils.BitmapUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import butterknife.Bind;
@@ -97,7 +100,8 @@ public class PropertyFragment extends BaseFragment {
 
         MainActivity mainActivity = (MainActivity)getActivity();
         try {
-            String name = new String(mainActivity.getUser().getName().getBytes(), "GBK");
+            String value = mainActivity.getUser().getName();
+            String name = new String(value.getBytes("UTF-8"));
             tvMeName.setText(name);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -108,5 +112,6 @@ public class PropertyFragment extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_property;
     }
+
 
 }
