@@ -38,4 +38,7 @@ dependencies {
     compile 'jp.wasabeef:picasso-transformations:2.1.2'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     testCompile 'junit:junit:4.12'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
 }

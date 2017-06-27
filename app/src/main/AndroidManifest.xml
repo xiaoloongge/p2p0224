@@ -50,6 +50,16 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.IconSettingsActivity" />
         <activity android:name=".fragment.PayActivity"></activity>
+
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <!-- alipay sdk end -->
     </application>
 
 </manifest>
