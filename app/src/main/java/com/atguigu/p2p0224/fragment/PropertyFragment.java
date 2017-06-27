@@ -115,6 +115,11 @@ public class PropertyFragment extends BaseFragment {
         }
     }
 
+
+    /*
+    *
+    * 当页面再次显示UI的时候 会调用此方法
+    * */
     @Override
     public void onResume() {
         super.onResume();

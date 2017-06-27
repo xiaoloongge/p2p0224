@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
@@ -122,6 +123,9 @@ public class IconSettingsActivity extends BaseActivity {
 
             }
         });
+        //调起本地相册
+//        Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        startActivityForResult(picture, 0);
     }
 
     private void makeImage(String photoPath) {
@@ -157,9 +161,24 @@ public class IconSettingsActivity extends BaseActivity {
 
             }
         });
+        //系统调用相机
+//        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        startActivityForResult(camera, 0);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+//        if (requestCode == 0){
+//            //拍照
+//            Bundle bundle = data.getExtras();
+//            // 获取相机返回的数据，并转换为图片格式
+//            Bitmap bitmap = (Bitmap) bundle.get("data");
+//            ivUserIcon.setImageBitmap(bitmap);
+//        }
+
+    }
 
     @Override
     public void initData() {
