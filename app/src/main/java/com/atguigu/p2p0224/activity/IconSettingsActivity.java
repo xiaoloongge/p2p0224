@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -128,24 +129,12 @@ public class IconSettingsActivity extends BaseActivity {
         //展示图片
         Picasso.with(this)
                 .load(new File(photoPath))
-                .transform(new Transformation() {
-                    @Override
-                    public Bitmap transform(Bitmap bitmap) {
-
-                        return BitmapUtils.getBitmap(bitmap);
-                    }
-
-                    @Override
-                    public String key() {
-                        return "CropCircleTransformation()";
-                    }
-                })
+                .transform(new CropCircleTransformation())
                 .into(ivUserIcon);
         //上传图片
 
         //保存到Sp中
-        //saveSp("image",photoPath);
-
+        saveImage(photoPath);
     }
 
     /*
@@ -174,26 +163,22 @@ public class IconSettingsActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        String image = getImage();
+        if (TextUtils.isEmpty(image)){
+            //加载头像
+            Picasso.with(IconSettingsActivity.this)
+                    .load(AppNetConfig.BASE_URL+"images/tx.png")
 
-        //加载头像
-        Picasso.with(IconSettingsActivity.this)
-                .load(AppNetConfig.BASE_URL+"images/tx.png")
+                    .transform(new CropCircleTransformation())
+                    .into(ivUserIcon);
+        }else{
+            //加载头像
+            Picasso.with(IconSettingsActivity.this)
+                    .load(new File(image))
 
-                .transform(new Transformation() {
-                    @Override
-                    public Bitmap transform(Bitmap bitmap) {
-
-                        return BitmapUtils.getBitmap(bitmap);
-                    }
-
-                    @Override
-                    public String key() {
-                        return "CropCircleTransformation()";
-                    }
-                })
-                .into(ivUserIcon);
-
-
+                    .transform(new CropCircleTransformation())
+                    .into(ivUserIcon);
+        }
     }
 
     @Override

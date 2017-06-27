@@ -2,6 +2,7 @@ package com.atguigu.p2p0224.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,11 +18,13 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import butterknife.Bind;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -50,6 +53,7 @@ public class PropertyFragment extends BaseFragment {
     TextView llTouziZhiguan;
     @Bind(R.id.ll_zichan)
     TextView llZichan;
+    private MainActivity mainActivity;
 
     @Override
     public String getChildUrl() {
@@ -81,30 +85,58 @@ public class PropertyFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        Picasso.with(getActivity())
-                .load(AppNetConfig.BASE_URL+"images/tx.png")
+//        Picasso.with(getActivity())
+//                .load(AppNetConfig.BASE_URL+"images/tx.png")
+//
+//                .transform(new Transformation() {
+//                    @Override
+//                    public Bitmap transform(Bitmap bitmap) {
+//
+//                        return BitmapUtils.getBitmap(bitmap);
+//                    }
+//
+//                    @Override
+//                    public String key() {
+//                        return "CropCircleTransformation()";
+//                    }
+//                })
+//                .into(ivMeIcon);
 
-                .transform(new Transformation() {
-                    @Override
-                    public Bitmap transform(Bitmap bitmap) {
+        mainActivity = (MainActivity)getActivity();
 
-                        return BitmapUtils.getBitmap(bitmap);
-                    }
 
-                    @Override
-                    public String key() {
-                        return "CropCircleTransformation()";
-                    }
-                })
-                .into(ivMeIcon);
 
-        MainActivity mainActivity = (MainActivity)getActivity();
         try {
             String value = mainActivity.getUser().getName();
             String name = new String(value.getBytes("UTF-8"));
             tvMeName.setText(name);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        String image =mainActivity.getImage();
+
+        /*
+        * 判断加载网络图片还是本地图片
+        * */
+        if (TextUtils.isEmpty(image)){
+            //加载头像
+            Picasso.with(getActivity())
+                    .load(AppNetConfig.BASE_URL+"images/tx.png")
+
+                    .transform(new CropCircleTransformation())
+                    .into(ivMeIcon);
+        }else{
+            //加载头像
+            Picasso.with(getActivity())
+                    .load(new File(image))
+                    .transform(new CropCircleTransformation())
+                    .into(ivMeIcon);
         }
     }
 
