@@ -89,6 +89,14 @@ public class PropertyFragment extends BaseFragment {
             }
         });
 
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),WidthDrawActivity.class));
+            }
+        });
+
+
     }
 
     @Override
