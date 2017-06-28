@@ -104,6 +104,7 @@ public class MoreFragment extends BaseFragment {
                     } else {
                         //设置密码
                         activity.save("settings", true);
+                        activity.save("toggle", isChecked);
                         //没有设置过密码
                         startActivity(new Intent(getActivity(), GestureEditActivity.class));
                     }
