@@ -9,10 +9,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alipay.sdk.encrypt.MD5;
 import com.atguigu.p2p0224.R;
 import com.atguigu.p2p0224.base.BaseActivity;
 import com.atguigu.p2p0224.common.AppNetConfig;
 import com.atguigu.p2p0224.utils.HttpUtils;
+import com.atguigu.p2p0224.utils.Md5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,7 +93,7 @@ public class RegisterActivity extends BaseActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name",name);
                 map.put("phone",number);
-                map.put("password",pwd);
+                map.put("password", Md5.Md5_16(pwd));
 
                 HttpUtils.getInstance().post(AppNetConfig.REGISTER, map, new HttpUtils.OnHttpClientListener() {
                     @Override

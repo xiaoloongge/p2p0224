@@ -16,6 +16,7 @@ import com.atguigu.p2p0224.base.BaseActivity;
 import com.atguigu.p2p0224.bean.LoginBean;
 import com.atguigu.p2p0224.common.AppNetConfig;
 import com.atguigu.p2p0224.utils.HttpUtils;
+import com.atguigu.p2p0224.utils.Md5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,7 +97,7 @@ public class LoginActivity extends BaseActivity {
                 //登录
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("phone",number);
-                map.put("password",pwd);
+                map.put("password", Md5.Md5_16(pwd));
                 HttpUtils.getInstance().post(AppNetConfig.LOGIN, map, new HttpUtils.OnHttpClientListener() {
                     @Override
                     public void onSuccess(String json) {

@@ -176,7 +176,7 @@ getFilesDir()方法用于获取/data/data/<application package>/files目录
         } else {
             file = getFilesDir();
         }
-
+        final File path = new File(file, "update.apk");
 
         //连网下载
         ThreadManager.getInstance().getThread().execute(new Runnable() {
@@ -188,16 +188,17 @@ getFilesDir()方法用于获取/data/data/<application package>/files目录
             public void run() {
                 //连网
                 try {
-                    URL url = new URL(updateBean.getApkUrl());
+                    URL url = new URL(AppNetConfig.BASE_URL+"app_new.apk");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");//必须是大写
                     connection.setConnectTimeout(5000);
                     connection.setReadTimeout(5000);
-                    connection.setRequestMethod("GET");//必须是大写
+                    connection.connect();
                     if (connection.getResponseCode() == 200) {//连网是否成功
                         //给progress设置最大值
                         progressDialog.setMax(connection.getContentLength());
                         inputStream = connection.getInputStream();
-                        fos = new FileOutputStream(new File(file, "update.apk"));
+                        fos = new FileOutputStream(path);
 
                         int len;
                         byte[] buffer = new byte[1024];
@@ -211,7 +212,7 @@ getFilesDir()方法用于获取/data/data/<application package>/files目录
                         progressDialog.dismiss();
                         //弹出是否安装
                         Intent install = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                        install.setData(Uri.parse("file:" + file.getAbsolutePath()));
+                        install.setData(Uri.parse("file:" + path.getAbsolutePath()));
                         startActivity(install);
 
 
