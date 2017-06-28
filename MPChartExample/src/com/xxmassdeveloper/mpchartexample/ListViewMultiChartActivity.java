@@ -100,7 +100,7 @@ public class ListViewMultiChartActivity extends DemoBase {
             e1.add(new Entry((int) (Math.random() * 65) + 40, i));
         }
 
-        LineDataSet d1 = new LineDataSet(e1, "New DataSet " + cnt + ", (1)");
+        LineDataSet d1 = new LineDataSet(e1, "宝强是否还爱马云");
         d1.setLineWidth(2.5f);
         d1.setCircleSize(4.5f);
         d1.setHighLightColor(Color.rgb(244, 117, 117));
