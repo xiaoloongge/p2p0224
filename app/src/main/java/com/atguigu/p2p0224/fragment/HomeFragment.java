@@ -1,6 +1,7 @@
 package com.atguigu.p2p0224.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p0224.R;
+import com.atguigu.p2p0224.activity.MainActivity;
+import com.atguigu.p2p0224.activity.gesture.GestureVerifyActivity;
 import com.atguigu.p2p0224.base.BaseFragment;
 import com.atguigu.p2p0224.bean.IndexBean;
 import com.atguigu.p2p0224.common.AppNetConfig;
@@ -80,6 +83,8 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
 
         loadNet();
+
+
     }
 
 
@@ -197,6 +202,8 @@ public class HomeFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+
 
 
 //    * 加载图片类

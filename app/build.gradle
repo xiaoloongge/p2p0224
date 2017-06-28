@@ -42,4 +42,5 @@ dependencies {
     compile 'jp.wasabeef:picasso-transformations:2.1.2'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     testCompile 'junit:junit:4.12'
+    compile project(':GestureLock')
 }

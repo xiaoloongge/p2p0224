@@ -63,6 +63,8 @@
         <activity android:name=".fragment.TouZiActivity" />
         <activity android:name=".fragment.TouZiZhiGuanActivity" />
         <activity android:name=".fragment.ZiChanActivity"></activity>
+        <activity android:name=".activity.gesture.GestureEditActivity"></activity>
+        <activity android:name=".activity.gesture.GestureVerifyActivity"></activity>
     </application>
 
 </manifest>
